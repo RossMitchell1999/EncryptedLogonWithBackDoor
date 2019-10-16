@@ -110,9 +110,8 @@ void testCin()
   
 
     std::cout << "(string)username is: " << username << '\n'; 
-    int exampleAddress; 
+    long exampleAddress; 
     std::stringstream s(username); 
-    s << std::hex << username;
     s >> std::hex >> exampleAddress; 
     std::cout << "(int)exampleAddress is: " << exampleAddress << '\n'; 
 
