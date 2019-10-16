@@ -48,8 +48,9 @@ string readIn(string name) {
 				return pass;							//Return hashed password of user
 			}
         }
+        return pass;
     }
-    return "";											//Return empty string
+    return "";											
 }
 
 // @desc The main. Used to take in two paramters and call methods to authenticate the details.
