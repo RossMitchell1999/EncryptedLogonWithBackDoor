@@ -28,34 +28,23 @@ string sha256(const string str)
     return ss.str();
 }
 
+// @desc   readIn(), given a username, compares the username with the list of names in the password database. If a match is found, the hashed password is returns. If no match, and empty string is returned 
+// @param  string name - username of person attempting to login
+// @return string      - hashed password of $name from password file if match found. Returns empty string if no match
 string readIn(string name) {
-        string user, pass, line;
-        ifstream inFile;
-        inFile.open("pwdb.txt");
-        if(inFile.is_open()){
-                while (getline(inFile, line)){
-                        user = line.substr(0, line.find(":"));
-                        pass= line.substr(line.find(":") + 1);
-                        if(user == name){
-                                return pass;
-                        }
-                }
+	string user, pass, line;					//Initialising strings
+	ifstream inFile;						//Initalise file stream
+	inFile.open("pwdb.txt");					//Opens password database file
+	if(inFile.is_open()){						//Check file is open
+		while (getline(inFile, line)){				//While line is not empty
+			user = line.substr(0, line.find(":"));		//Set user to text before the delimeter ":"
+			pass= line.substr(line.find(":") + 1);		//Set pass to text after the delimeter ":"
+			if(user == name){				//If user is equal to name
+				return pass;				//Return hashed password of user
+			}
         }
-        return NULL;
-}
-
-bool compare(string hash, string pass){
-        if (hash.compare(pass) == 0)
-        {   
-                cout << "YES" << endl;
-                return true;
-        }
-        else
-        {
-                cout << "NO" << endl;
-                return false;
-        }
-
+    }
+    return "";											
 }
 
 void* loginMessage()
@@ -145,12 +134,36 @@ void testCin()
 
 
 int main() {
-
-
-        do 
+        bool auth{false};
+        do
         {
+                std::cout << "Please enter username: " << '\n';
+                std::string username;
+                std::cin >> username;
+                std::cout << "Please enter password " << '\n';
+                std::string password;
+                std::cin >> password;
 
-        } while ();
+                if(sha256(password) == readIn(username))
+                {
+                        authenticated("user");
+                        auth = true;
+                }
+                else
+                {
+                        rejected("user");
+                }
+        } while (auth == false);
+        
+        //testCin();
+
+        
+
+        // do 
+        // {
+                
+        //         }
+        // } while (!auth);
 
 
 //    cout << sha256("1234567890_1") << endl;
@@ -175,7 +188,7 @@ int main() {
     // cout << "Comparison of alicePasswordHash and alice login(should be correct): " <<
     // compare("5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705", readIn("alice")) << '\n';
 
-        testCin();
+       // testCin();
 
     // welcomeMessage = name2ptr;
     // std::cout << *welcomeMessage;
@@ -189,10 +202,7 @@ int main() {
 
 
 
-        bool auth = true;
-        if (compare("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", readIn("root")) == auth) 
-                authenticated("user");
-        else rejected("user");
+
 
     return 0;
 }
