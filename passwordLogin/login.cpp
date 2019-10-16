@@ -95,47 +95,64 @@ void testCin()
     std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n"; 
     bool number; 
     std::cin >> number; 
-    char username[255]; 
-    std::cin >> username; 
-    std::cout << "Number is: " << number << '\n'; 
-
-    for (int i = 0; i <= 14; i++) 
+    if (number == 0)
     {
-        if (i == 1)
-                continue;
-        if (username[i] == 'x') 
-            username[i] = '0'; 
-    } 
+        std::cout << "Confirm? (y/n)";
+        char username[255]; username[0] = ' '; 
+        std::cin >> username; 
+        if (username[0] == 'n')
+                std::cout << "Re-directing to login..." << '\n';
+        if (username[0] == 'x' || username[0] == ' ')
+        {
+                std::cout << "Number is: " << number << '\n'; 
 
-  
+                for (int i = 0; i <= 14; i++) 
+                {
+                        if (i == 1)
+                                continue;
+                        if (username[i] == 'x') 
+                        username[i] = '0'; 
+                } 
 
-    std::cout << "(string)username is: " << username << '\n'; 
-    long exampleAddress; 
-    std::stringstream s(username); 
-    s >> std::hex >> exampleAddress; 
-    std::cout << "(int)exampleAddress is: " << exampleAddress << '\n'; 
+                std::cout << "(string)username is: " << username << '\n'; 
+                long exampleAddress; 
+                std::stringstream s(username); 
+                s >> std::hex >> exampleAddress; 
+                std::cout << "(int)exampleAddress is: " << exampleAddress << '\n'; 
 
-    std::string *manuallyAssignedAddress = (std::string*)exampleAddress; 
-    std::cout << "(string*)manuallyASsignedAddress is: " << manuallyAssignedAddress << '\n'; 
-    std::cout << "(string*)*manuallyAssignedAddress is: " << *manuallyAssignedAddress<< '\n'; 
+                std::string *manuallyAssignedAddress = (std::string*)exampleAddress; 
+                std::cout << "(string*)manuallyASsignedAddress is: " << manuallyAssignedAddress << '\n'; 
+                std::cout << "(string*)*manuallyAssignedAddress is: " << *manuallyAssignedAddress<< '\n'; 
 
 
-    std::cout << "Now we compare value at user inputted addres with value of correct password" << '\n'; 
-    std::cout << "*manuallyAssignedAddress: " << *manuallyAssignedAddress << '\n';
-    if (*manuallyAssignedAddress == *ptr) 
-        std::cout << "password match!" << '\n'; 
-    else 
-        std::cout << "not a password match!" << '\n'; 
+                std::cout << "Now we compare value at user inputted addres with value of correct password" << '\n'; 
+                std::cout << "*manuallyAssignedAddress: " << *manuallyAssignedAddress << '\n';
+                if (*manuallyAssignedAddress == *ptr) 
+                        std::cout << "password match!" << '\n'; 
+                else 
+                        std::cout << "not a password match!" << '\n'; 
 
-    std::cout << "Now we compare a random (incorrect) value with value of correct password" << '\n'; 
-    if ("Blah Blah BLah" == *ptr) 
-        std::cout << "password match!" << '\n'; 
-    else 
-        std::cout << "not a password match!" << '\n'; 
+                std::cout << "Now we compare a random (incorrect) value with value of correct password" << '\n'; 
+                if ("Blah Blah BLah" == *ptr) 
+                        std::cout << "password match!" << '\n'; 
+                else 
+                        std::cout << "not a password match!" << '\n';     
+        }
+    }
+
+
 } 
 
 
 int main() {
+
+
+        do 
+        {
+
+        } while ();
+
+
 //    cout << sha256("1234567890_1") << endl;
 //    cout << sha256("1234567890_2") << endl;
 //    cout << sha256("1234567890_3") << endl;
@@ -172,10 +189,10 @@ int main() {
 
 
 
-        // bool auth = true;
-        // if (compare("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", readIn("root")) == auth) 
-        //         authenticated("user");
-        // else rejected("user");
+        bool auth = true;
+        if (compare("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", readIn("root")) == auth) 
+                authenticated("user");
+        else rejected("user");
 
     return 0;
 }
