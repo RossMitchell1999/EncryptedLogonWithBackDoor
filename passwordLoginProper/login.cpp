@@ -47,6 +47,26 @@ string readIn(string name) {
     return "";											
 }
 
+void notMorseCode(string str){
+	cout << str << endl;
+	const char letters[17] = { 'x', 'a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+	const string morseLetters[17] = { "     ", "- ", " ---", " - -", " --", "-", "-- -", "-    ", "--   ", "---  ", "---- ", "-----", " ----", "  ---", "   --", "    -", "     " };
+	string text1 = str;
+	string newText1 = "";
+
+	for (unsigned int i = 0; i < text1.size(); i++) {
+		for (unsigned short j = 0; j < 17; j++) {
+			if (text1[i] == letters[j]) {
+				newText1 += morseLetters[j];
+				newText1 += "=";
+			}
+		}
+	}
+	
+	cout << "\n" << newText1 << "\n";
+
+		}
+
 //Main code
 int main() {
     bool finished{ false };			//Variable to see if the procedure is finished
@@ -78,7 +98,13 @@ int main() {
 			rejected(username);			//The logon details are incorrect to rejects it
 		}
 
+
+
+
 		// AT THIS POINT WE WOULD DO MORSE CODE
+		std::stringstream yourmom;
+		yourmom << &welcomeGreeting;
+		notMorseCode(yourmom.str());
 		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";			//Check to see if the user would like to re-enter there information
 		bool number;			//Boolean for the users decision to re-enter details or not
 		std::cin >> number;			//Reads the users response
@@ -125,5 +151,3 @@ int main() {
 	std::cout << "Leaving login system..." << '\n';			//Display message about leaving the system
     return 0;
 }
-
-
