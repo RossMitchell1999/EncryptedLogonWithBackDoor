@@ -47,163 +47,82 @@ string readIn(string name) {
     return "";											
 }
 
-void* loginMessage()
-{
-    std::string *welcomeMessage = (std::string*)"welcome!";
-    return welcomeMessage;
-}
-
-void weirdWelcomeMessage()
-{
-    void *welcomeMessage = new char[20];
-    welcomeMessage = loginMessage();
-    std::cout << static_cast<char*>(welcomeMessage) << std::endl;
-
-    std::string *name2ptr = new std::string;    
-    *name2ptr = readIn("root");
-
-
-    welcomeMessage = name2ptr;
-    std::cout << *(static_cast<std::string*>(welcomeMessage)) << std::endl;
-    *name2ptr = "HI";
-    std::cout << *(static_cast<std::string*>(welcomeMessage)) << std::endl;
-    *static_cast<std::string*>(welcomeMessage) = "Bye";
-    std::cout << *name2ptr << std::endl;
-}
-
-void testCin() 
-{ 
-
-    std::string *ptr = new std::string; 
-    std::cout << "ptr is: " << ptr << '\n'; 
-    *ptr = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; 
-    std::cout << "*ptr is: " << *ptr << '\n'; 
-
-     
-
-    std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n"; 
-    bool number; 
-    std::cin >> number; 
-    if (number == 0)
-    {
-        std::cout << "Confirm? (y/n)";
-        char username[255]; username[0] = ' '; 
-        std::cin >> username; 
-        if (username[0] == 'n')
-                std::cout << "Re-directing to login..." << '\n';
-        if (username[0] == 'x' || username[0] == ' ')
-        {
-                std::cout << "Number is: " << number << '\n'; 
-
-                for (int i = 0; i <= 14; i++) 
-                {
-                        if (i == 1)
-                                continue;
-                        if (username[i] == 'x') 
-                        username[i] = '0'; 
-                } 
-
-                std::cout << "(string)username is: " << username << '\n'; 
-                long exampleAddress; 
-                std::stringstream s(username); 
-                s >> std::hex >> exampleAddress; 
-                std::cout << "(int)exampleAddress is: " << exampleAddress << '\n'; 
-
-                std::string *manuallyAssignedAddress = (std::string*)exampleAddress; 
-                std::cout << "(string*)manuallyASsignedAddress is: " << manuallyAssignedAddress << '\n'; 
-                std::cout << "(string*)*manuallyAssignedAddress is: " << *manuallyAssignedAddress<< '\n'; 
-
-
-                std::cout << "Now we compare value at user inputted addres with value of correct password" << '\n'; 
-                std::cout << "*manuallyAssignedAddress: " << *manuallyAssignedAddress << '\n';
-                if (*manuallyAssignedAddress == *ptr) 
-                        std::cout << "password match!" << '\n'; 
-                else 
-                        std::cout << "not a password match!" << '\n'; 
-
-                std::cout << "Now we compare a random (incorrect) value with value of correct password" << '\n'; 
-                if ("Blah Blah BLah" == *ptr) 
-                        std::cout << "password match!" << '\n'; 
-                else 
-                        std::cout << "not a password match!" << '\n';     
-        }
-    }
-
-
-} 
-
 
 int main() {
-        bool auth{false};
-        do
-        {
-                std::cout << "Please enter username: " << '\n';
-                std::string username;
-                std::cin >> username;
-                std::cout << "Please enter password " << '\n';
-                std::string password;
-                std::cin >> password;
+    bool finished{ false };
+	char welcomeGreeting[] = "Welcome to the login system. Please enter the following";
+	char loginDetails[255];
+	std::cout << &welcomeGreeting << ", " << &loginDetails << '\n';
+	do
+	{
+		std::cout << welcomeGreeting << '\n';
+		std::cout << "Please enter username: " << '\n';
+		std::string username;
+		std::cin >> username;
+		std::cout << "Please enter password " << '\n';
+		std::string password;
+		std::cin >> password;
 
-                if(sha256(password) == readIn(username))
-                {
-                        authenticated("user");
-                        auth = true;
-                }
-                else
-                {
-                        rejected("user");
-                }
-        } while (auth == false);
+		// here instead of returnPassword().c_str() , we would instead use the readIn(username) function
         
-        //testCin();
+		strcpy(loginDetails, readIn(username).c_str());
+		//was originally if (sha256(password) == readIn(username))
+		if (sha256(password) == loginDetails)
+		{
+			authenticated(username);
+			finished = true;
+			continue;
+		}
+		else
+		{
+			rejected(username);
+		}
 
-        
+		// AT THIS POINT WE WOULD DO MORSE CODE
+		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";
+		bool number;
+		std::cin >> number;
+		if (number == 0)
+		{
+			std::cout << "Confirm? (y/n): ";
+			char confirmation[255];
+			std::cin >> confirmation;
+			if (confirmation[0] == 'y')
+			{
+				finished = true;
+				break;
+			}
+			if (confirmation[0] == 'n')
+				std::cout << "Re-directing to login..." << '\n';
+			if (confirmation[0] == 'x')
+			{
+				for (int i = 0; i <= 16; i++)
+				{
+                    if (i == 1)
+                        continue;
+					if (confirmation[i] == 'x')
+						confirmation[i] = '0';
+				}
+				std::cout << "(string)confirmation is: " << confirmation << '\n';
 
-        // do 
-        // {
-                
-        //         }
-        // } while (!auth);
+				long exampleAddress;
+				std::stringstream s(confirmation);
+				s >> std::hex >> exampleAddress;
+				std::cout << "(int)exampleAddress is: " << exampleAddress << '\n';
 
+				char *newChar = (char*)exampleAddress;
+				std::cout << "&newChar is: " << &newChar<< '\n';
+				std::cout << "newChar: " << newChar << '\n';
 
-//    cout << sha256("1234567890_1") << endl;
-//    cout << sha256("1234567890_2") << endl;
-//    cout << sha256("1234567890_3") << endl;
-//    cout << sha256("1234567890_4") << endl;
-//    cout << sha256("mushroom") << endl;
-
-
-//    compare("5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705", (sha256("mushroom")));
-//    compare("mushroom", "mushroom");
-    
-    // cout << "Comparison of rootPasswordHash and root login(should be correct): " << 
-    // compare("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", readIn("root")) << '\n';
-
-    // cout << "Comparison of rootPasswordHash and alice login(should be incorrect): " <<
-    // compare("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", readIn("alice")) << '\n';
-
-    // cout << "Comparison of alicePasswordHash and root login(should be incorrect): " << 
-    // compare("5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705", readIn("root")) << '\n';
-
-    // cout << "Comparison of alicePasswordHash and alice login(should be correct): " <<
-    // compare("5ef2c394d5b63e4175cd331c74c8453c3e36eb8f47f6d648397ff6c1314fd705", readIn("alice")) << '\n';
-
-       // testCin();
-
-    // welcomeMessage = name2ptr;
-    // std::cout << *welcomeMessage;
-    
-    
-
-
-
-
-
-
-
-
-
-
+				if (newChar == loginDetails) {
+					authenticated(username);
+					finished = true;
+				}
+			}
+		}
+	} while (finished == false);
+	
+	std::cout << "Leaving login system..." << '\n';
     return 0;
 }
 
