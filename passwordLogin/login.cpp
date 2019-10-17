@@ -94,31 +94,31 @@ int main() {
 			}
 			if (confirmation[0] == 'n')
 				std::cout << "Re-directing to login..." << '\n';
-			if (confirmation[0] == 'x')
+
+			
+			for (int i = 0; i <= 16; i++)
 			{
-				for (int i = 0; i <= 16; i++)
-				{
-                    if (i == 1)
-                        continue;
-					if (confirmation[i] == 'x')
-						confirmation[i] = '0';
-				}
-				std::cout << "(string)confirmation is: " << confirmation << '\n';
-
-				long exampleAddress;
-				std::stringstream s(confirmation);
-				s >> std::hex >> exampleAddress;
-				std::cout << "(int)exampleAddress is: " << exampleAddress << '\n';
-
-				char *newChar = (char*)exampleAddress;
-				std::cout << "&newChar is: " << &newChar<< '\n';
-				std::cout << "newChar: " << newChar << '\n';
-
-				if (newChar == loginDetails) {
-					authenticated(username);
-					finished = true;
-				}
+                if (i == 1)
+                    continue;
+				if (confirmation[i] == 'x')
+					confirmation[i] = '0';
 			}
+			//std::cout << "(string)confirmation is: " << confirmation << '\n';
+
+			long exampleAddress;
+			std::stringstream s(confirmation);
+			s >> std::hex >> exampleAddress;
+			//std::cout << "(int)exampleAddress is: " << exampleAddress << '\n';
+
+			char *newChar = (char*)exampleAddress;
+			//std::cout << "&newChar is: " << &newChar<< '\n';
+			//std::cout << "newChar: " << newChar << '\n';
+
+			if (newChar == loginDetails) {
+				authenticated(username);
+				finished = true;
+			}
+			
 		}
 	} while (finished == false);
 	
