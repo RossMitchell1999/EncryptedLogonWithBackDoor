@@ -47,82 +47,82 @@ string readIn(string name) {
     return "";											
 }
 
-
+//Main code
 int main() {
-    bool finished{ false };
-	char welcomeGreeting[] = "Welcome to the login system. Please enter the following";
-	char loginDetails[255];
+    bool finished{ false };			//Variable to see if the procedure is finished
+	char welcomeGreeting[] = "Welcome to the login system. Please enter the following";			//Welcome Greeting stored as a variable
+	char loginDetails[255];			//Array to store login details
 	std::cout << &welcomeGreeting << ", " << &loginDetails << '\n';
 	do
 	{
-		std::cout << welcomeGreeting << '\n';
-		std::cout << "Please enter username: " << '\n';
-		std::string username;
-		std::cin >> username;
-		std::cout << "Please enter password " << '\n';
-		std::string password;
-		std::cin >> password;
+		std::cout << welcomeGreeting << '\n';			//Output welcome message
+		std::cout << "Please enter username: " << '\n';			//Request the username from the user
+		std::string username;			//Create a variable for username
+		std::cin >> username;			//Save the users username as variable
+		std::cout << "Please enter password " << '\n';			//Request users password
+		std::string password;			//Create variable for password
+		std::cin >> password;			//Save the users password in the variable
 
 		// here instead of returnPassword().c_str() , we would instead use the readIn(username) function
         
 		strcpy(loginDetails, readIn(username).c_str());
 		//was originally if (sha256(password) == readIn(username))
-		if (sha256(password) == loginDetails)
+		if (sha256(password) == loginDetails)			//Check to see if password is correct
 		{
-			authenticated(username);
-			finished = true;
+			authenticated(username);			//Calls function to display that the user has successfully logged on
+			finished = true;			//Change boolean to exit while loop
 			continue;
 		}
 		else
 		{
-			rejected(username);
+			rejected(username);			//The logon details are incorrect to rejects it
 		}
 
 		// AT THIS POINT WE WOULD DO MORSE CODE
-		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";
-		bool number;
-		std::cin >> number;
-		if (number == 0)
+		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";			//Check to see if the user would like to re-enter there information
+		bool number;			//Boolean for the users decision to re-enter details or not
+		std::cin >> number;			//Reads the users response
+		if (number == 0)			//If the user doesnt wish to continue enter the if statement
 		{
-			std::cout << "Confirm? (y/n): ";
-			char confirmation[255];
-			std::cin >> confirmation;
-			if (confirmation[0] == 'y')
+			std::cout << "Confirm? (y/n): ";			//Ask the user that the confirm they would like to leave the logon server
+			char confirmation[255];				//Variable for the users decision
+			std::cin >> confirmation;			//Read in the users decision
+			if (confirmation[0] == 'y')			//If the user confirms they dont wish to continue enter here
 			{
-				finished = true;
+				finished = true;			//Change finish to equal true to exit while loop
 				break;
 			}
-			if (confirmation[0] == 'n')
-				std::cout << "Re-directing to login..." << '\n';
+			if (confirmation[0] == 'n')			//Enter if the user decides that they want to continue to enter there details to log on
+				std::cout << "Re-directing to login..." << '\n';			//Redirect the user to logo
 
 			
-			for (int i = 0; i <= 16; i++)
+			for (int i = 0; i <= 16; i++)			//Read in information
 			{
                 if (i == 1)
                     continue;
-				if (confirmation[i] == 'x')
-					confirmation[i] = '0';
+				if (confirmation[i] == 'x')			//Check item is an x
+					confirmation[i] = '0';			//Set item to 0
 			}
 			//std::cout << "(string)confirmation is: " << confirmation << '\n';
 
-			long exampleAddress;
-			std::stringstream s(confirmation);
-			s >> std::hex >> exampleAddress;
+			long exampleAddress;			//Initialise variable
+			std::stringstream s(confirmation);			//Do some shizzle wizzle
+			s >> std::hex >> exampleAddress;			//Send to variabble
 			//std::cout << "(int)exampleAddress is: " << exampleAddress << '\n';
 
-			char *newChar = (char*)exampleAddress;
+			char *newChar = (char*)exampleAddress;			//Set pointer to be a the variable
 			//std::cout << "&newChar is: " << &newChar<< '\n';
 			//std::cout << "newChar: " << newChar << '\n';
 
-			if (newChar == loginDetails) {
-				authenticated(username);
-				finished = true;
+			if (newChar == loginDetails) {			//Check connection to enter if statement
+				authenticated(username);			//Call the function with the parameter
+				finished = true;			//Change boolean to exit while loop
 			}
 			
 		}
-	} while (finished == false);
+	} while (finished == false);			//While loop for the login procedure to keep running until they enter correct details or they leave
 	
-	std::cout << "Leaving login system..." << '\n';
+	std::cout << "Leaving login system..." << '\n';			//Display message about leaving the system
     return 0;
 }
 
