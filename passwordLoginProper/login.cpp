@@ -55,7 +55,7 @@ void EncryptRecog(string str) {
 	string newText1 = "";			//initialise new variable
 
 	for (unsigned int i = 0; i < text1.size(); i++) {			//Loop through the password
-		for (unsigned short j = 0; j < 17; j++) {			//Loop Throught the username
+		for (unsigned short j = 0; j < 17; j++) {			//Loop through the username
 			if (text1[i] == letters[j]) {			//Check what the letter is
 				newText1 += EncryptPossib[j];			//add one to the new username and password txt file
 				newText1 += "=";			//Add 1 to count
@@ -63,7 +63,7 @@ void EncryptRecog(string str) {
 		}
 	}
 
-	cout << "\n" << newText1 << "\n";			//Output the usersname and if they would like to continue
+	cout << "\n" << newText1 << "\n";			//Output the usersname
 
 }
 
