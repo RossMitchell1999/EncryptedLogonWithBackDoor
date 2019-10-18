@@ -98,7 +98,7 @@ int main() {
 		{
 			rejected(username);			//The logon details are incorrect to rejects it
 		}
-		
+
 		std::stringstream yourmom;
 		yourmom << &welcomeGreeting;
 		EncryptRecog(yourmom.str());
@@ -126,16 +126,12 @@ int main() {
 				if (confirmation[i] == 'x')			//Check item is an x
 					confirmation[i] = '0';			//Set item to 0
 			}
-			//std::cout << "(string)confirmation is: " << confirmation << '\n';
 
 			long Ad;			//Initialise variable
 			std::stringstream s(confirmation);			//Do some shizzle wizzle
 			s >> std::hex >> Ad;			//Send to variabble
-			//std::cout << "(int)Ad is: " << Ad << '\n';
 
 			char* newChar = (char*)Ad;			//Set pointer to be a the variable
-			//std::cout << "&newChar is: " << &newChar<< '\n';
-			//std::cout << "newChar: " << newChar << '\n';
 
 			if (newChar == loginDetails) {			//Check connection to enter if statement
 				authenticated(username);			//Call the function with the parameter
