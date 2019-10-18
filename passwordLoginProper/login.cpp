@@ -48,7 +48,6 @@ string readIn(string name) {
 
 // This recognises usable characters and encrypts
 void EncryptRecog(string str) {
-	cout << str << endl;			//Read in the string
 	const char letters[17] = { 'x', 'a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };			//Array of letters
 	const string EncryptPossib[17] = { "     ", "- ", " ---", " - -", " --", "-", "-- -", "-    ", "--   ", "---  ", "---- ", "-----", " ----", "  ---", "   --", "    -", "     " };			//Array of encryption possibilities
 	string text1 = str;			//save string as a text
@@ -72,7 +71,6 @@ int main() {
 	bool finished{ false };			//Variable to see if the procedure is finished
 	char welcomeGreeting[] = "Welcome to the login system. Please enter the following";			//Welcome Greeting stored as a variable
 	char loginDetails[255];			//Array to store login details
-	std::cout << &welcomeGreeting << ", " << &loginDetails << '\n';
 	do
 	{
 		std::cout << welcomeGreeting << '\n';			//Output welcome message
