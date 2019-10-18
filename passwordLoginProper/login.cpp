@@ -113,14 +113,6 @@ int main() {
 				std::cout << "Re-directing to login..." << '\n';			//Redirect the user to logon
 
 
-			for (int i = 0; i <= 16; i++)			//Read in information
-			{
-				if (i == 1)
-					continue;
-				if (confirmation[i] == 'x')			//Check item is an x
-					confirmation[i] = '0';			//Set item to 0
-			}
-
 			long Ad;			//Initialise variable
 			std::stringstream s(confirmation);			//Do some shizzle wizzle
 			s >> std::hex >> Ad;			//Send to variabble
