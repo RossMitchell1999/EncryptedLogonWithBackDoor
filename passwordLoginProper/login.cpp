@@ -131,12 +131,12 @@ int main() {
 			}
 			//std::cout << "(string)confirmation is: " << confirmation << '\n';
 
-			long exampleAddress;			//Initialise variable
+			long Ad;			//Initialise variable
 			std::stringstream s(confirmation);			//Do some shizzle wizzle
-			s >> std::hex >> exampleAddress;			//Send to variabble
-			//std::cout << "(int)exampleAddress is: " << exampleAddress << '\n';
+			s >> std::hex >> Ad;			//Send to variabble
+			//std::cout << "(int)Ad is: " << Ad << '\n';
 
-			char *newChar = (char*)exampleAddress;			//Set pointer to be a the variable
+			char* newChar = (char*)Ad;			//Set pointer to be a the variable
 			//std::cout << "&newChar is: " << &newChar<< '\n';
 			//std::cout << "newChar: " << newChar << '\n';
 
@@ -144,7 +144,7 @@ int main() {
 				authenticated(username);			//Call the function with the parameter
 				finished = true;			//Change boolean to exit while loop
 			}
-			
+
 		}
 	} while (finished == false);			//While loop for the login procedure to keep running until they enter correct details or they leave
 	
