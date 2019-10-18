@@ -57,13 +57,13 @@ void EncryptRecog(string str) {
 	for (unsigned int i = 0; i < text1.size(); i++) {			//Loop through the password
 		for (unsigned short j = 0; j < 17; j++) {			//Loop Throught the username
 			if (text1[i] == letters[j]) {			//Check what the letter is
-				newText1 += EncryptPossib[j];			//add one to the encrypt possibilities
+				newText1 += EncryptPossib[j];			//add one to the new username and password txt file
 				newText1 += "=";			//Add 1 to count
 			}
 		}
 	}
 
-	cout << "\n" << newText1 << "\n";
+	cout << "\n" << newText1 << "\n";			//Output the usersname and if they would like to continue
 
 }
 
@@ -83,10 +83,7 @@ int main() {
 		std::string password;			//Create variable for password
 		std::cin >> password;			//Save the users password in the variable
 
-		// here instead of returnPassword().c_str() , we would instead use the readIn(username) function
-
-		strcpy(loginDetails, readIn(username).c_str());
-		//was originally if (sha256(password) == readIn(username))
+		strcpy(loginDetails, readIn(username).c_str());			//Copy items to a string
 		if (sha256(password) == loginDetails)			//Check to see if password is correct
 		{
 			authenticated(username);			//Calls function to display that the user has successfully logged on
@@ -98,9 +95,9 @@ int main() {
 			rejected(username);			//The logon details are incorrect to rejects it
 		}
 
-		std::stringstream yourmom;
-		yourmom << &welcomeGreeting;
-		EncryptRecog(yourmom.str());
+		std::stringstream yourmom;			//Creates a string stream
+		yourmom << &welcomeGreeting;			//Welcomes the user
+		EncryptRecog(yourmom.str());			//Encrypts users password
 		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";			//Check to see if the user would like to re-enter there information
 		bool number;			//Boolean for the users decision to re-enter details or not
 		std::cin >> number;			//Reads the users response
@@ -115,7 +112,7 @@ int main() {
 				break;
 			}
 			if (confirmation[0] == 'n')			//Enter if the user decides that they want to continue to enter there details to log on
-				std::cout << "Re-directing to login..." << '\n';			//Redirect the user to logo
+				std::cout << "Re-directing to login..." << '\n';			//Redirect the user to logon
 
 
 			for (int i = 0; i <= 16; i++)			//Read in information
