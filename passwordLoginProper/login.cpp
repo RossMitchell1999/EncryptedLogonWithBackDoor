@@ -28,7 +28,6 @@ string sha256(const string str)
 	return ss.str();
 }
 
-// @desc   readIn(), given a username, compares the username with the list of names in the password database. If a match is found, the hashed password is returns. If no match, and empty string is returned 
 // @param  string name - username of person attempting to login
 // @return string      - hashed password of $name from password file if match found. Returns empty string if no match
 string readIn(string name) {
