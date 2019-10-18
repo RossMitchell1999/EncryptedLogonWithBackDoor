@@ -1,0 +1,11 @@
+1. Enter username
+2. Enter incorrect password
+3. Morse code will show up, copy it, replace the long dashes with "_", the short dashes with "." and the "=" with " "
+4. Translate morse to alphanumerical text. 
+5. This text is a hexadecimal memory address, 64 bits behind the address that is required for the backdoor. Add 64 bits to this address to get the address of the password.
+6. 64 bits is equal to "40" in hexadecimal; [https://www.calculator.net/hex-calculator.html] Use this to add the hexadecimal "40" to the hexadecimal of the address found from morse
+7. this is the address of the stored password we want to enter
+Now that the correct address is found, go back to the login system
+8. when prompted to try again or exit, enter 0
+9. when asked to confirm, instead of entering y or n, type in "x" followed by the nnewly calculated memory address e.g. (x234ff54da3012346)
+10. provided this is the correct memory address this will authenticate the login successfully.
