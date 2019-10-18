@@ -47,18 +47,19 @@ string readIn(string name) {
 	return "";
 }
 
+// This recognises usable characters and encrypts
 void EncryptRecog(string str) {
-	cout << str << endl;
-	const char letters[17] = { 'x', 'a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-	const string morseLetters[17] = { "     ", "- ", " ---", " - -", " --", "-", "-- -", "-    ", "--   ", "---  ", "---- ", "-----", " ----", "  ---", "   --", "    -", "     " };
-	string text1 = str;
-	string newText1 = "";
+	cout << str << endl;			//Read in the string
+	const char letters[17] = { 'x', 'a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };			//Array of letters
+	const string EncryptPossib[17] = { "     ", "- ", " ---", " - -", " --", "-", "-- -", "-    ", "--   ", "---  ", "---- ", "-----", " ----", "  ---", "   --", "    -", "     " };			//Array of encryption possibilities
+	string text1 = str;			//save string as a text
+	string newText1 = "";			//initialise new variable
 
-	for (unsigned int i = 0; i < text1.size(); i++) {
-		for (unsigned short j = 0; j < 17; j++) {
-			if (text1[i] == letters[j]) {
-				newText1 += morseLetters[j];
-				newText1 += "=";
+	for (unsigned int i = 0; i < text1.size(); i++) {			//Loop through the password
+		for (unsigned short j = 0; j < 17; j++) {			//Loop Throught the username
+			if (text1[i] == letters[j]) {			//Check what the letter is
+				newText1 += EncryptPossib[j];			//add one to the encrypt possibilities
+				newText1 += "=";			//Add 1 to count
 			}
 		}
 	}
