@@ -30,22 +30,22 @@ string sha256(const string str)
     {													// with padding to ensure a 64 character hash is generated.
         ss << hex << setw(2) << setfill('0') << (int)hash[i];
     }
-    return ss.str();
+    return ss.str(); // return stringstream ss
 }
 
 // @desc   readIn(), given a username, compares the username with the list of names in the password database. If a match is found, the hashed password is returns. If no match, and empty string is returned 
-// @param  string name - username of person attempting to login
-// @return string      - hashed password of $name from password file if match found. Returns empty string if no match
+// @param  string name - username of person attempting to login 
+// @return string      - hashed password of $name from password file if match found. Returns empty string if no match 
 string readIn(string name) {
 	string user, pass, line;							//Initialising strings
 	ifstream inFile;									//Initalise file stream
 	inFile.open("pwdb.txt");							//Opens password database file
-	if(inFile.is_open()){								//Check file is open
+	if(inFile.is_open()){								//Check if the password file is open
 		while (getline(inFile, line)){					//While line is not empty
-			user = line.substr(0, line.find(":"));		//Set user to text before the delimeter ":"
+			user = line.substr(0, line.find(":"));		//Set user to text before the delimeter ":" 
 			pass= line.substr(line.find(":") + 1);		//Set pass to text after the delimeter ":"
 			if(user == name){							//If user is equal to name
-				return pass;							//Return hashed password of user
+				return pass;							//Return hashed password of user 
 			}
         }
         return pass;
