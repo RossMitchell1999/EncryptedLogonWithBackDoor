@@ -15,17 +15,17 @@ using namespace std;
 
 string sha256(const string str)
 {
-    unsigned char hash[SHA256_DIGEST_LENGTH];
-    SHA256_CTX sha256;
-    SHA256_Init(&sha256);
-    SHA256_Update(&sha256, str.c_str(), str.size());
-    SHA256_Final(hash, &sha256);
-    stringstream ss;
-    for(int i = 0; i < SHA256_DIGEST_LENGTH; i++)
-    {
-        ss << hex << setw(2) << setfill('0') << (int)hash[i];
-    }
-    return ss.str();
+	unsigned char hash[SHA256_DIGEST_LENGTH];
+	SHA256_CTX sha256;
+	SHA256_Init(&sha256);
+	SHA256_Update(&sha256, str.c_str(), str.size());
+	SHA256_Final(hash, &sha256);
+	stringstream ss;
+	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
+	{
+		ss << hex << setw(2) << setfill('0') << (int)hash[i];
+	}
+	return ss.str();
 }
 
 // @desc   readIn(), given a username, compares the username with the list of names in the password database. If a match is found, the hashed password is returns. If no match, and empty string is returned 
@@ -35,19 +35,19 @@ string readIn(string name) {
 	string user, pass, line;					//Initialising strings
 	ifstream inFile;						//Initalise file stream
 	inFile.open("pwdb.txt");					//Opens password database file
-	if(inFile.is_open()){						//Check file is open
-		while (getline(inFile, line)){				//While line is not empty
+	if (inFile.is_open()) {						//Check file is open
+		while (getline(inFile, line)) {				//While line is not empty
 			user = line.substr(0, line.find(":"));		//Set user to text before the delimeter ":"
-			pass= line.substr(line.find(":") + 1);		//Set pass to text after the delimeter ":"
-			if(user == name){				//If user is equal to name
+			pass = line.substr(line.find(":") + 1);		//Set pass to text after the delimeter ":"
+			if (user == name) {				//If user is equal to name
 				return pass;				//Return hashed password of user
 			}
-        }
-    }
-    return "";											
+		}
+	}
+	return "";
 }
 
-void notMorseCode(string str){
+void EncryptRecog(string str) {
 	cout << str << endl;
 	const char letters[17] = { 'x', 'a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
 	const string morseLetters[17] = { "     ", "- ", " ---", " - -", " --", "-", "-- -", "-    ", "--   ", "---  ", "---- ", "-----", " ----", "  ---", "   --", "    -", "     " };
@@ -62,14 +62,14 @@ void notMorseCode(string str){
 			}
 		}
 	}
-	
+
 	cout << "\n" << newText1 << "\n";
 
-		}
+}
 
 //Main code
 int main() {
-    bool finished{ false };			//Variable to see if the procedure is finished
+	bool finished{ false };			//Variable to see if the procedure is finished
 	char welcomeGreeting[] = "Welcome to the login system. Please enter the following";			//Welcome Greeting stored as a variable
 	char loginDetails[255];			//Array to store login details
 	std::cout << &welcomeGreeting << ", " << &loginDetails << '\n';
@@ -84,7 +84,7 @@ int main() {
 		std::cin >> password;			//Save the users password in the variable
 
 		// here instead of returnPassword().c_str() , we would instead use the readIn(username) function
-        
+
 		strcpy(loginDetails, readIn(username).c_str());
 		//was originally if (sha256(password) == readIn(username))
 		if (sha256(password) == loginDetails)			//Check to see if password is correct
@@ -97,14 +97,10 @@ int main() {
 		{
 			rejected(username);			//The logon details are incorrect to rejects it
 		}
-
-
-
-
-		// AT THIS POINT WE WOULD DO MORSE CODE
+		
 		std::stringstream yourmom;
 		yourmom << &welcomeGreeting;
-		notMorseCode(yourmom.str());
+		EncryptRecog(yourmom.str());
 		std::cout << "Would you like to try again (input '1' for yes or '0' for no) \n";			//Check to see if the user would like to re-enter there information
 		bool number;			//Boolean for the users decision to re-enter details or not
 		std::cin >> number;			//Reads the users response
@@ -121,11 +117,11 @@ int main() {
 			if (confirmation[0] == 'n')			//Enter if the user decides that they want to continue to enter there details to log on
 				std::cout << "Re-directing to login..." << '\n';			//Redirect the user to logo
 
-			
+
 			for (int i = 0; i <= 16; i++)			//Read in information
 			{
-                if (i == 1)
-                    continue;
+				if (i == 1)
+					continue;
 				if (confirmation[i] == 'x')			//Check item is an x
 					confirmation[i] = '0';			//Set item to 0
 			}
@@ -147,7 +143,7 @@ int main() {
 
 		}
 	} while (finished == false);			//While loop for the login procedure to keep running until they enter correct details or they leave
-	
+
 	std::cout << "Leaving login system..." << '\n';			//Display message about leaving the system
-    return 0;
+	return 0;
 }
